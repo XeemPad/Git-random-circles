@@ -30,11 +30,12 @@ class Ui_Form(object):
 class Widget(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
         self.initUI()
 
     def initUI(self):
         self.setGeometry(500, 200, 600, 520)
-        self.setWindowTitle('Жёлтые круги')
+        self.setWindowTitle('Случайные окружности')
 
         self.do_paint = False
         self.startButton.clicked.connect(self.paint)
@@ -51,7 +52,8 @@ class Widget(QWidget, Ui_Form):
             qp.end()
 
     def draw_rings(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        color = randint(0, 255), randint(0, 255), randint(0, 255)
+        qp.setBrush(QColor(*color))
         for _ in range(10):
             x, y = randint(0, 580), randint(0, 500)
             d = randint(5, 100)
